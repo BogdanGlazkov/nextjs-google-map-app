@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import SideNavBar from "@/components/SideNavBar";
 import SearchBar from "@/components/SearchBar";
 import CategoryList from "@/components/CategoryList";
+import BusinessList from "@/components/BusinessList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +15,7 @@ export default function Home() {
         <div>
           <SearchBar />
           <CategoryList />
+          <BusinessList />
         </div>
         <div>Google Map</div>
       </section>
