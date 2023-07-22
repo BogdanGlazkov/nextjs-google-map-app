@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CategoryListData } from "@/assets/data";
 import CategoryItem from "./CategoryItem";
 
-const CategoryList = () => {
+const CategoryList = ({ setSelectedCategory }) => {
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const CategoryList = () => {
       <ul className="flex gap-6 mb-5">
         {category
           ? category.map((item, idx) => (
-              <li key={idx}>
+              <li key={idx} onClick={() => setSelectedCategory(item.value)}>
                 <CategoryItem category={item} />
               </li>
             ))

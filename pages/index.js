@@ -11,14 +11,14 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [businessList, setBusinessList] = useState([]);
 
-  const getNearbyPlace = () => {
-    getNearby("gas_station", "35.5827712", "-80.8484864").then((res) =>
+  const getNearbyPlace = (category) => {
+    getNearby(category, "35.5827712", "-80.8484864").then((res) =>
       setBusinessList(res.data.results)
     );
   };
 
   useEffect(() => {
-    getNearbyPlace();
+    getNearbyPlace("gas_station");
   }, []);
 
   return (
@@ -27,7 +27,9 @@ export default function Home() {
       <section className="grid grid-cols-1 gap-8 md:grid-cols-2 px-6 md:px-10 w-full mt-10">
         <div>
           <SearchBar />
-          <CategoryList />
+          <CategoryList
+            setSelectedCategory={(category) => getNearbyPlace(category)}
+          />
           <BusinessList data={businessList} />
         </div>
         <div>Google Map</div>
