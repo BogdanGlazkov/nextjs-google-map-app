@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BusinessItem from "./BusinessItem";
 
 const BusinessList = () => {
   const [count, setCount] = useState(0);
@@ -42,6 +43,9 @@ const BusinessList = () => {
           </svg>
         </span>
       </h3>
+      <div>
+        <BusinessItem />
+      </div>
     </div>
   );
 };
