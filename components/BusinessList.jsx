@@ -18,7 +18,7 @@ const BusinessList = ({ data }) => {
               strokeWidth={1.5}
               stroke="currentColor"
               className="w-10 h-10 p-2 text-gray-400 hover:text-purple-500 hover:bg-purple-100 rounded-lg cursor-pointer"
-              onClick={() => setCount(count - 1)}
+              onClick={() => setCount(count - 3)}
             >
               <path
                 strokeLinecap="round"
@@ -34,7 +34,7 @@ const BusinessList = ({ data }) => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-10 h-10 p-2 text-gray-400 hover:text-purple-500 hover:bg-purple-100 rounded-lg cursor-pointer"
-            onClick={() => setCount(count + 1)}
+            onClick={() => setCount(count + 3)}
           >
             <path
               strokeLinecap="round"
@@ -44,9 +44,19 @@ const BusinessList = ({ data }) => {
           </svg>
         </span>
       </h3>
-      <div>
-        <BusinessItem />
-      </div>
+      <ul>
+        {data.length
+          ? data.map(
+              (business, idx) =>
+                idx >= count &&
+                idx < count + 3 && (
+                  <li key={business.place_id}>
+                    <BusinessItem business={business} />
+                  </li>
+                )
+            )
+          : null}
+      </ul>
     </div>
   );
 };
