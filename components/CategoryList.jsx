@@ -16,8 +16,8 @@ const CategoryList = () => {
       </h2>
       <ul className="flex gap-6 mb-5">
         {category
-          ? category.map((item) => (
-              <li key={item.id}>
+          ? category.map((item, idx) => (
+              <li key={idx}>
                 <CategoryItem category={item} />
               </li>
             ))

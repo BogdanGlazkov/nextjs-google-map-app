@@ -1,8 +1,9 @@
 import { useState } from "react";
 import BusinessItem from "./BusinessItem";
 
-const BusinessList = () => {
+const BusinessList = ({ data }) => {
   const [count, setCount] = useState(0);
+  console.log(data);
 
   return (
     <div>
