@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Inter } from "next/font/google";
+import { UserLocationContext } from "@/context/UserLocationContext";
 import SideNavBar from "@/components/SideNavBar";
 import SearchBar from "@/components/SearchBar";
 import CategoryList from "@/components/CategoryList";
@@ -10,16 +11,19 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [businessList, setBusinessList] = useState([]);
+  const { userLocation, setUserLocation } = useContext(UserLocationContext);
 
   const getNearbyPlace = (category) => {
-    getNearby(category, "35.5827712", "-80.8484864").then((res) =>
+    getNearby(category, userLocation?.lat, userLocation?.lng).then((res) =>
       setBusinessList(res.data.results)
     );
   };
 
   useEffect(() => {
-    getNearbyPlace("gas_station");
-  }, []);
+    if (userLocation) {
+      getNearbyPlace("gas_station");
+    }
+  }, [userLocation]);
 
   return (
     <main className="flex">

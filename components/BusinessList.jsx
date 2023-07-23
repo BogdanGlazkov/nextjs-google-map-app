@@ -12,6 +12,11 @@ const BusinessList = ({ data }) => {
     }, 1000);
   }, []);
 
+  useEffect(() => {
+    setLoading(true);
+    setCount(0);
+  }, [data]);
+
   return (
     <div>
       <h3 className="text-[20px] font-bold my-3 flex items-center justify-between">
