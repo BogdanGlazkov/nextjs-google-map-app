@@ -1,11 +1,12 @@
 import { useEffect, useState, useContext } from "react";
 import { Inter } from "next/font/google";
 import { UserLocationContext } from "@/context/UserLocationContext";
+import { getNearby } from "@/services/GlobalApi";
 import SideNavBar from "@/components/SideNavBar";
 import SearchBar from "@/components/SearchBar";
 import CategoryList from "@/components/CategoryList";
 import BusinessList from "@/components/BusinessList";
-import { getNearby } from "@/services/GlobalApi";
+import Map from "@/components/Map";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,9 @@ export default function Home() {
           />
           <BusinessList data={businessList} />
         </div>
-        <div>Google Map</div>
+        <div>
+          <Map />
+        </div>
       </section>
     </main>
   );
