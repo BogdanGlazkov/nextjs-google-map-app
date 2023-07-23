@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BusinessItem from "./BusinessItem";
+import ShimmerEffectItem from "./ShimmerEffectItem";
 
 const BusinessList = ({ data }) => {
   const [count, setCount] = useState(0);
-  console.log(data);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setInterval(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   return (
     <div>
@@ -47,7 +54,7 @@ const BusinessList = ({ data }) => {
         </span>
       </h3>
       <ul>
-        {data.length
+        {data.length && !loading
           ? data.map(
               (business, idx) =>
                 idx >= count &&
@@ -59,6 +66,9 @@ const BusinessList = ({ data }) => {
             )
           : null}
       </ul>
+      {loading
+        ? [1, 2, 3].map((el) => <ShimmerEffectItem key={el.toString()} />)
+        : null}
     </div>
   );
 };
