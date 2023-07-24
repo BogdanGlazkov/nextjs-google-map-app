@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { UserLocationContext } from "@/context/UserLocationContext";
+import Marker from "./Marker";
 
 const containerStyle = {
   width: "100%",
@@ -11,7 +12,6 @@ const containerStyle = {
 const Map = () => {
   const { userLocation, setUserLocation } = useContext(UserLocationContext);
   const { lat, lng } = userLocation;
-  const onLoad = (marker) => console.log("Marker: ", marker);
 
   return (
     <div>
@@ -20,16 +20,9 @@ const Map = () => {
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={{ lat, lng }}
-            zoom={15}
+            zoom={14}
           >
-            <Marker
-              icon={{
-                url: "/user-location.png",
-                scaledSize: { width: 50, height: 50 },
-              }}
-              onLoad={onLoad}
-              position={{ lat, lng }}
-            />
+            <Marker userLocation={userLocation} />
           </GoogleMap>
         ) : null}
       </LoadScript>
