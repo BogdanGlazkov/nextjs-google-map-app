@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Inter } from "next/font/google";
 import { UserLocationContext } from "@/context/UserLocationContext";
 import { BusinessListContext } from "@/context/BusinessListContext";
+import { SelectedBusinessContext } from "@/context/SelectedBusinessContext";
 import { getNearby } from "@/services/GlobalApi";
 import SideNavBar from "@/components/SideNavBar";
 import SearchBar from "@/components/SearchBar";
@@ -14,6 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [businessList, setBusinessList] = useState([]);
   const { userLocation, setUserLocation } = useContext(UserLocationContext);
+  const [selectedBusiness, setSelectedBusiness] = useState([]);
 
   const getNearbyPlace = (category) => {
     getNearby(category, userLocation?.lat, userLocation?.lng).then((res) =>
@@ -29,21 +31,25 @@ export default function Home() {
 
   return (
     <main className="flex">
-      <BusinessListContext.Provider value={{ businessList, setBusinessList }}>
-        <SideNavBar />
-        <section className="grid grid-cols-1 gap-8 md:grid-cols-2 px-6 md:px-10 w-full mt-10">
-          <div>
-            <SearchBar />
-            <CategoryList
-              setSelectedCategory={(category) => getNearbyPlace(category)}
-            />
-            <BusinessList data={businessList} />
-          </div>
-          <div>
-            <Map />
-          </div>
-        </section>
-      </BusinessListContext.Provider>
+      <SelectedBusinessContext.Provider
+        value={{ selectedBusiness, setSelectedBusiness }}
+      >
+        <BusinessListContext.Provider value={{ businessList, setBusinessList }}>
+          <SideNavBar />
+          <section className="grid grid-cols-1 gap-8 md:grid-cols-2 px-6 md:px-10 w-full mt-10">
+            <div>
+              <SearchBar />
+              <CategoryList
+                setSelectedCategory={(category) => getNearbyPlace(category)}
+              />
+              <BusinessList data={businessList} />
+            </div>
+            <div>
+              <Map />
+            </div>
+          </section>
+        </BusinessListContext.Provider>
+      </SelectedBusinessContext.Provider>
     </main>
   );
 }

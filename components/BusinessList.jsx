@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BusinessItem from "./BusinessItem";
 import ShimmerEffectItem from "./ShimmerEffectItem";
+import { SelectedBusinessContext } from "@/context/SelectedBusinessContext";
 
 const BusinessList = ({ data }) => {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const { selectedBusiness, setSelectedBusiness } = useContext(
+    SelectedBusinessContext
+  );
 
   useEffect(() => {
     setInterval(() => {
@@ -64,7 +68,11 @@ const BusinessList = ({ data }) => {
               (business, idx) =>
                 idx >= count &&
                 idx < count + 3 && (
-                  <li key={business.place_id}>
+                  <li
+                    className="cursor-pointer"
+                    key={idx.toString()}
+                    onClick={() => setSelectedBusiness(business)}
+                  >
                     <BusinessItem business={business} />
                   </li>
                 )
