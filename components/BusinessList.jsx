@@ -69,7 +69,11 @@ const BusinessList = ({ data }) => {
                 idx >= count &&
                 idx < count + 3 && (
                   <li
-                    className="cursor-pointer"
+                    className={`cursor-pointer ${
+                      selectedBusiness?.name === business.name
+                        ? "bg-purple-200"
+                        : null
+                    }`}
                     key={idx.toString()}
                     onClick={() => setSelectedBusiness(business)}
                   >

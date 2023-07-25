@@ -16,7 +16,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [businessList, setBusinessList] = useState([]);
   const { userLocation, setUserLocation } = useContext(UserLocationContext);
-  const [selectedBusiness, setSelectedBusiness] = useState([]);
+  const [selectedBusiness, setSelectedBusiness] = useState(null);
 
   const getNearbyPlace = (category) => {
     getNearby(category, userLocation?.lat, userLocation?.lng).then((res) =>
@@ -47,7 +47,10 @@ export default function Home() {
             </div>
             <div>
               <Map />
-              <BusinessToast userLocation={userLocation} />
+
+              {selectedBusiness ? (
+                <BusinessToast userLocation={userLocation} />
+              ) : null}
             </div>
           </section>
         </BusinessListContext.Provider>
