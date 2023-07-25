@@ -9,6 +9,7 @@ import SearchBar from "@/components/SearchBar";
 import CategoryList from "@/components/CategoryList";
 import BusinessList from "@/components/BusinessList";
 import Map from "@/components/Map";
+import BusinessToast from "@/components/BusinessToast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,6 +47,7 @@ export default function Home() {
             </div>
             <div>
               <Map />
+              <BusinessToast />
             </div>
           </section>
         </BusinessListContext.Provider>
