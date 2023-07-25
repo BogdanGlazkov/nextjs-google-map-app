@@ -47,7 +47,7 @@ export default function Home() {
             </div>
             <div>
               <Map />
-              <BusinessToast />
+              <BusinessToast userLocation={userLocation} />
             </div>
           </section>
         </BusinessListContext.Provider>
