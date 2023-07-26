@@ -45,7 +45,7 @@ export default function Home() {
               />
               <BusinessList data={businessList} />
             </div>
-            <div>
+            <div className="order-first md:order-last">
               <Map />
 
               {selectedBusiness ? (

@@ -1,16 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserLocationContext } from "@/context/UserLocationContext";
 import { BusinessListContext } from "@/context/BusinessListContext";
 import { searchPlace } from "@/services/GlobalApi";
 
 const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const { userLocation, setUserLocation } = useContext(UserLocationContext);
   const { businessList, setBusinessList } = useContext(BusinessListContext);
 
-  const searchBusiness = (searchText) => {
-    searchPlace(searchText, userLocation.lat, userLocation.lng).then(
+  const searchBusiness = () => {
+    searchPlace(searchQuery, userLocation.lat, userLocation.lng).then(
       (response) => setBusinessList(response.data.candidates)
     );
+    setSearchQuery("");
   };
 
   return (
@@ -22,6 +24,7 @@ const SearchBar = () => {
         strokeWidth={1.5}
         stroke="currentColor"
         className="w-10 h-10 p-2 cursor-pointer rounded-lg text-purple-400"
+        onClick={searchBusiness}
       >
         <path
           strokeLinecap="round"
@@ -34,7 +37,9 @@ const SearchBar = () => {
         className="bg-transparent text-purple-700 w-full outline-none text-[17px] placeholder-purple-400"
         type="text"
         placeholder="Search"
-        onKeyDown={(e) => e.key === "Enter" && searchBusiness(e.target.value)}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && searchBusiness()}
       />
     </div>
   );
