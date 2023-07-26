@@ -1,6 +1,18 @@
-import React from "react";
+import { useContext } from "react";
+import { UserLocationContext } from "@/context/UserLocationContext";
+import { BusinessListContext } from "@/context/BusinessListContext";
+import { searchPlace } from "@/services/GlobalApi";
 
 const SearchBar = () => {
+  const { userLocation, setUserLocation } = useContext(UserLocationContext);
+  const { businessList, setBusinessList } = useContext(BusinessListContext);
+
+  const searchBusiness = (searchText) => {
+    searchPlace(searchText, userLocation.lat, userLocation.lng).then(
+      (response) => setBusinessList(response.data.candidates)
+    );
+  };
+
   return (
     <div className="flex gap-3 bg-purple-100 p-3 rounded-xl">
       <svg
@@ -22,7 +34,7 @@ const SearchBar = () => {
         className="bg-transparent text-purple-700 w-full outline-none text-[17px] placeholder-purple-400"
         type="text"
         placeholder="Search"
-        onKeyDown={(e) => e.key === "Enter" && console.log(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && searchBusiness(e.target.value)}
       />
     </div>
   );
