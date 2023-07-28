@@ -22,7 +22,7 @@ const SideNavBar = () => {
   ];
 
   return (
-    <div className="p-2 items-center flex flex-col w-[100px] space-y-4 shadow-md shadow-purple-400 h-screen sticky top-0 x-10">
+    <div className="p-2 items-center flex flex-col w-[100px] space-y-4 shadow-md shadow-purple-400 h-screen sticky top-0 x-10 mobilescreen:w-[80px]">
       <Image
         className="cursor-pointer"
         src="/logo.png"

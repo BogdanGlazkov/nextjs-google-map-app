@@ -7,9 +7,9 @@ const BusinessItem = ({ business }) => {
   const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 
   return (
-    <div className="flex items-center gap-3 p-3 mb-4 border-b-[1px] border-purple-300">
+    <div className="flex  items-center gap-3 p-3 mb-4 border-b-[1px] border-purple-300 mobilescreen:flex-col mobilescreen:p-0">
       <Image
-        className="rounded-xl object-cover w-[100px] h-[100px]"
+        className="rounded-xl object-cover w-[100px] h-[100px] mobilescreen:w-[200px] mobilescreen:h-[200px]"
         src={
           photoRef
             ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photoRef}&key=${GOOGLE_API_KEY}`
