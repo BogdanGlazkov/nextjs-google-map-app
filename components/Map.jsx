@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { UserLocationContext } from "@/context/UserLocationContext";
 import Marker from "./Marker";
+import BusinessToast from "./BusinessToast";
 import { SelectedBusinessContext } from "@/context/SelectedBusinessContext";
 
 const containerStyle = {
@@ -18,7 +19,7 @@ const Map = () => {
   const { lat, lng } = userLocation;
 
   return (
-    <div>
+    <div className="relative">
       <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}>
         {userLocation ? (
           <GoogleMap
@@ -34,6 +35,8 @@ const Map = () => {
           </GoogleMap>
         ) : null}
       </LoadScript>
+
+      {selectedBusiness ? <BusinessToast userLocation={userLocation} /> : null}
     </div>
   );
 };

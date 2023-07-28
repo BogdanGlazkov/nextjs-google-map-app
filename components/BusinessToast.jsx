@@ -21,12 +21,12 @@ const BusinessToast = ({ userLocation }) => {
     if (selectedBusiness.name) {
       setDistance(calculateDistance(bLat, bLng, lat, lng).toFixed(1));
     }
-  }, [selectedBusiness]);
+  }, [selectedBusiness, bLat, bLng, lat, lng]);
 
   return (
     <>
       {selectedBusiness ? (
-        <div className="fixed bottom-5 right-5 z-10 flex items-center gap-5 bg-purple-400 opacity-90 p-4 rounded-2xl text-white">
+        <div className="absolute bottom-5 right-5 z-10 flex items-center gap-5 bg-purple-400 opacity-90 p-4 rounded-2xl text-white">
           <div>
             <h2 className="font-semibold text-[20px]">
               {selectedBusiness.name}
